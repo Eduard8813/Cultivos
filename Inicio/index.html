@@ -1,0 +1,143 @@
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Rieguito Welcome - Pineapples Zoomed</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      font-family: "Fredoka One", cursive;  
+    }
+  </style>
+</head>
+<body class="bg-gray-200 flex justify-center items-center min-h-screen p-2">
+  <div
+    class="relative w-full max-w-6xl h-[400px] bg-pink-400 flex justify-center items-center"
+  >
+        <!-- Imagen izquierda -->
+        <img
+        src="../Imagenes/piña.png"
+        alt="Piña izquierda"
+        class="absolute"
+        style="
+          left: -220px; /* Desplaza hacia la derecha desde el borde izquierdo */
+          bottom: 0px; /* Desplaza hacia arriba desde el borde inferior */
+          width: 600px; 
+          height: auto;
+          filter: hue-rotate(300deg) saturate(4) brightness(1.1);
+          transition: transform 0.5s ease-in-out;
+        "
+        onmouseover="this.style.transform='scale(1.5)';"
+        onmouseout="this.style.transform='scale(1)';"
+      />
+    <!-- Imagen izquierda -->
+    <img
+  src="../Imagenes/piña.png"
+  alt="Piña derecha"
+  class="absolute"
+  style="
+    right: -220px; 
+    bottom: 0px;
+    width: 600px; 
+    height: auto;
+    filter: hue-rotate(300deg) saturate(4) brightness(1.1);
+    transition: transform 0.5s ease-in-out;
+  "
+  onmouseover="this.style.transform='scale(1.5)';"
+  onmouseout="this.style.transform='scale(1)';"
+/>
+
+
+    <!-- Text "Bienvenido a Rieguito" without box -->
+    <div class="absolute top-9 left-1/2 -translate-x-1/2 text-white text-center">
+      <h1 class="text-4xl font-bold leading-tight">
+        Bienvenido a
+        <br />
+        Rieguito
+      </h1>
+    </div>
+
+    <!-- Orange circle top center -->
+    <div class="absolute top-4 left-1/2 -translate-x-1/2 w-12 h-6 rounded-b-full" 
+    style="background-color: #f7a600;
+    left: 47%;
+    transform: rotate(180deg); 
+    "></div>
+
+    <!-- Green circle bottom center -->
+    <div class="absolute bottom-60 left-1/2 -translate-x-1/2 w-12 h-6 rounded-t-full" 
+    style="background-color: #6f8a3d;
+    left:47%;
+    transform: rotate(-180deg); ">
+    </div>
+    
+    <div>
+        <!-- Imagen de la gotita -->
+        <img
+          src="../Imagenes/gotita.png"
+          alt="Imagen de una gotita"
+          class="absolute w-[150px] h-auto object-contain"
+          style="top: 5%; left: 35%; transform: translateX(-50%);"
+        />
+      </div>
+      
+    <div>
+    <img
+        src="../Imagenes/personita.png"
+        alt="Imagen centrada"
+        class="w-[140px] h-auto object-contain"
+        style="  
+        position: absolute;
+        left: 36%;
+        top:60%;
+        filter: brightness(1.2);
+        transition: transform 0.5s ease-in-out, filter 0.5s ease-in-out;
+        "
+        onmouseover="this.style.transform='scale(1.1) rotate(10deg)'; this.style.filter='brightness(1.5)';"
+        onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.filter='brightness(1.2)';"
+    />
+    </div>
+
+    <div
+      class="absolute bottom-36 left-1/2 -translate-x-1/2 ml-[140px] bg-blue-800 text-white font-semibold text-center text-sm leading-tight rounded-full px-6 py-4 max-w-xs"
+      style="font-family: 'Fredoka One', cursive;
+      left:40%;"
+    >
+      Hola, soy Lola.
+      <br />
+      Déjame tomar tus datos,
+      <br />
+      por favor
+      <div
+        class="absolute bottom-[-20px] left-1/2 -translate-x-1/2 w-0 h-0 border-t-[20px] border-t-blue-800 border-x-[15px] border-x-transparent"
+      ></div>
+    </div>
+
+    <!-- Blue circle with black arrow -->
+    <div
+    class="absolute bottom-20 right-40 w-20 h-20 rounded-full bg-blue-300 flex justify-center items-center cursor-pointer"
+    style="position: absolute;
+    top:70%;
+    right:25%;"
+    draggable="true" 
+    ondragend="this.style.top = event.clientY + 'px'; this.style.left = event.clientX + 'px';"
+    onclick="window.location.href='https://www.tu-enlace-destino.com';"
+  >
+    <svg
+      class="w-8 h-8 text-black"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="3"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </div>
+  
+</body>
+</html>
