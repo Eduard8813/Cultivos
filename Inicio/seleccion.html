@@ -71,24 +71,31 @@
    /* Campos section container */
    .campos-container {
      width: 100%;
-     max-width: 420px;
-     margin: 1.5rem auto 0 auto;
+     max-width: 450px;
+     margin: 1.5rem auto 0 auto; 
+     margin-left: -50px ; /* Asegura que se mueve a la izquierda */
+     text-align: left; /* Mantiene todo alineado a la izquierda */
    }
    .campos-title {
+    display: block;
      background-color: #9cc7e1;
      color: black;
      font-family: 'Fredoka One', cursive;
      text-align: center;
      border-radius: 9999px;
+     text-align: center; /* Alinea el texto a la izquierda */
+     margin-left: -300; /* Elimina cualquier margen adicional */
      padding: 0.5rem 0;
      font-weight: 700;
      font-size: 1.125rem;
      user-select: none;
    }
-   .campos-buttons {
+   .campos-buttons  {
      display: flex;
      margin-top: 1.5rem;
-     gap: 1.5rem;
+     justify-content: flex-start;
+     margin-left: -300px; 
+     gap: 3rem;
      position: relative;
      align-items: center;
    }
@@ -96,7 +103,7 @@
      flex: 1;
      background-color: #ec4cae;
      border-radius: 3.5rem;
-     padding: 1.5rem 2rem;
+     padding: 1.5rem 3rem;
      display: flex;
      align-items: center;
      gap: 1rem;
@@ -109,8 +116,8 @@
      font-family: 'Fredoka One', cursive;
    }
    .btn-pina img, .btn-otros img {
-     width: 64px;
-     height: 64px;
+     width: 100px;
+     height: 100px;
      object-fit: contain;
    }
    .btn-pina:hover, .btn-pina:focus,
@@ -120,11 +127,11 @@
      outline: none;
    }
    .earth-container {
-     width: 220px; /* increased size */
-     height: 220px; /* increased size */
+     width: 400px; /* increased size */
+     height: 400px; /* increased size */
      position: absolute;
-     right: -240px;
-     top: 50%;
+     right: -400px;
+     top: 25%;
      transform: translateY(-50%);
      pointer-events: none;
    }
