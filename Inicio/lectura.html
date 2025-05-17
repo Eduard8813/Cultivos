@@ -130,8 +130,8 @@
      width: 400px; /* increased size */
      height: 400px; /* increased size */
      position: absolute;
-     right: -400px;
-     top: 25%;
+     right: -450px;
+     top: 20%;
      transform: translateY(-50%);
      pointer-events: none;
    }
@@ -139,6 +139,32 @@
      width: 100%;
      height: 100%;
      object-fit: contain;
+   }
+   .text-container {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     flex-grow: 1;
+   }
+   .text-container .label {
+     text-align: left;
+   }
+   .text-container .percent {
+     text-align: right;
+     font-size: 2rem;
+     font-weight: 900;
+     line-height: 1;
+     margin-top: 0.25rem;
+     display: flex;
+     justify-content: flex-end;
+     gap: 0.25rem;
+     user-select: none;
+   }
+   .percent .number {
+     order: 1;
+   }
+   .percent .symbol {
+     order: 2;
    }
    @media (max-width: 768px) {
      .campos-buttons {
@@ -173,33 +199,41 @@
    </h1>
   </div>
   <!-- Professional separator between pink and white -->
-  <div class="separator"></div>
+  <div class="separator">
+  </div>
   <!-- Campos section with piña, otros and earth -->
   <div class="curved-white max-w-7xl mx-auto flex flex-col items-center px-10 relative z-20">
    <div class="campos-container">
     <div class="campos-title">
-     CAMPOS
+     CAMPO DE PIÑA
     </div>
     <div class="campos-buttons">
-     <button class="btn-pina" type="button" tabindex="0">
-      <img alt="Illustration of a cute pineapple with green leaves and orange body" src="../Imagenes/piña1.png" width="64" height="64"/>
-      <span>Piña</span>
+     <button class="btn-pina" tabindex="0" type="button">
+      <img alt="Illustration of a cute water drops with smiling faces" height="100" src="../Imagenes/lluvia.png" width="100"/>
+      <div class="text-container">
+       <span class="label">Humedad</span>
+       <span class="percent"><span class="number" id="humedad-value">0</span><span class="symbol">%</span></span>
+      </div>
      </button>
-     <button class="btn-otros" type="button" tabindex="0">
-      <img alt="Illustration of a stylized blue leaf inside a pink circle with rays" src="../Imagenes/otro.png" width="64" height="64"/>
-      <span>Otros</span>
+     <button class="btn-otros" tabindex="0" type="button">
+      <img alt="Illustration of a blue plant in pot with thermometer icon" height="100" src="../Imagenes/" width="100"/>
+      <div class="text-container">
+       <span class="label">Temperatura</span>
+       <span class="percent"><span class="number" id="temperatura-value">0</span><span class="symbol">%</span></span>
+      </div>
      </button>
-     <div class="earth-container" aria-hidden="true">
-      <img alt="Cute earth with smiling face and pink clouds" src="../Imagenes/mundo-habla.png" width="230" height="220"/>
+     <div aria-hidden="true" class="earth-container">
+      <img alt="Cute earth with smiling face and pink clouds" height="220" src="../Imagenes/mundo-cultivo.png" width="230"/>
      </div>
     </div>
    </div>
   </div>
   <!-- Arrow button bottom right linking to another page -->
   <div class="flex justify-end px-10 mt-10 max-w-7xl mx-auto flex-grow">
-   <a href="../Inicio/lectura.html" aria-label="Next page" class="bg-sky-300 rounded-full w-12 h-12 flex items-center justify-center inline-block">
+   <a aria-label="Next page" class="bg-sky-300 rounded-full w-12 h-12 flex items-center justify-center inline-block" href="../Inicio/lectura.html">
     <svg class="h-6 w-6 text-black" fill="none" stroke="currentColor" stroke-width="3" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-     <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path>
+     <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round">
+     </path>
     </svg>
    </a>
   </div>
@@ -214,6 +248,21 @@
      currentIndex = (currentIndex + 1) % images.length;
      images[currentIndex].classList.add('active');
    }, 5000);
+
+   // Set random values for Humedad and Temperatura continuously
+   function getRandomInt(min, max) {
+     return Math.floor(Math.random() * (max - min + 1)) + min;
+   }
+
+   function updateValues() {
+     const humedadValue = document.getElementById('humedad-value');
+     const temperaturaValue = document.getElementById('temperatura-value');
+     humedadValue.textContent = getRandomInt(30, 90);
+     temperaturaValue.textContent = getRandomInt(10, 40);
+   }
+
+   setInterval(updateValues, 1500);
+   updateValues();
   </script>
  </body>
 </html>
