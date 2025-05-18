@@ -29,7 +29,7 @@ function handleSubmit(event) {
  if (ciudad && region && tamano) {
   // Redirigir a otra página con los datos en query params
   const params = new URLSearchParams({ ciudad, region, tamano });
-  window.location.href = "seleccion.html"
+  window.location.href = "seleccion.php"
  } else {
   alert("Por favor, completa todos los campos.");
  }

@@ -72,7 +72,7 @@
     <div class="flex flex-wrap justify-between gap-y-4">
      <button
       id="submitBtn"
-      onclick="window.location.href='general.html';"
+      onclick="window.location.href='general.php';"
       disabled
       class="bg-pink-700 cursor-not-allowed rounded-full px-8 py-3 text-lg font-semibold text-white min-w-[160px] opacity-50 transition-colors"
       type="submit"
@@ -80,7 +80,7 @@
       Iniciar sesión
      </button>
      <button
-      onclick="window.location.href='password.html';"
+      onclick="window.location.href='password.php';"
       class="text-lg font-semibold self-center min-w-[160px] hover:underline"
       type="button"
      >
@@ -90,7 +90,7 @@
     <div class="flex flex-wrap justify-between mt-6 gap-y-4">
      <p class="text-lg font-semibold min-w-[160px]">¿Aún no tienes una cuenta?</p>
      <button
-      onclick="window.location.href='registro.html';"
+      onclick="window.location.href='registro.php';"
       class="text-lg font-semibold min-w-[160px] hover:underline"
       type="button"
      >

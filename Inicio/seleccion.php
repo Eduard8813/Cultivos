@@ -9,7 +9,7 @@
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&amp;display=swap" rel="stylesheet"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="../estilos/styles7.css">
+  <link rel="stylesheet" href="../estilos/styles6.css">
  </head>
  <body class="bg-white relative overflow-x-hidden min-h-screen flex flex-col">
   <!-- Animated fullscreen background container -->
@@ -26,44 +26,36 @@
    </h1>
   </div>
   <!-- Professional separator between pink and white -->
-  <div class="separator">
-  </div>
+  <div class="separator"></div>
   <!-- Campos section with piña, otros and earth -->
   <div class="curved-white max-w-7xl mx-auto flex flex-col items-center px-10 relative z-20">
    <div class="campos-container">
     <div class="campos-title">
-     CAMPO DE PIÑA
+     CAMPOS
     </div>
     <div class="campos-buttons">
-     <button class="btn-pina" tabindex="0" type="button">
-      <img alt="Illustration of a cute water drops with smiling faces" height="100" src="../Imagenes/lluvia.png" width="100"/>
-      <div class="text-container">
-       <span class="label">Humedad</span>
-       <span class="percent"><span class="number" id="humedad-value">0</span><span class="symbol">%</span></span>
-      </div>
+     <button class="btn-pina" type="button" tabindex="0">
+      <img alt="Illustration of a cute pineapple with green leaves and orange body" src="../Imagenes/piña1.png" width="64" height="64"/>
+      <span>Piña</span>
      </button>
-     <button class="btn-otros" tabindex="0" type="button">
-      <img alt="Illustration of a blue plant in pot with thermometer icon" height="100" src="../Imagenes/temperatura.png" width="100"/>
-      <div class="text-container">
-       <span class="label">Temperatura</span>
-       <span class="percent"><span class="number" id="temperatura-value">0</span><span class="symbol">%</span></span>
-      </div>
+     <button class="btn-otros" type="button" tabindex="0">
+      <img alt="Illustration of a stylized blue leaf inside a pink circle with rays" src="../Imagenes/otro.png" width="64" height="64"/>
+      <span>Otros</span>
      </button>
-     <div aria-hidden="true" class="earth-container">
-      <img alt="Cute earth with smiling face and pink clouds" height="220" src="../Imagenes/mundo-cultivo.png" width="230"/>
+     <div class="earth-container" aria-hidden="true">
+      <img alt="Cute earth with smiling face and pink clouds" src="../Imagenes/mundo-habla.png" width="230" height="220"/>
      </div>
     </div>
    </div>
   </div>
   <!-- Arrow button bottom right linking to another page -->
   <div class="flex justify-end px-10 mt-10 max-w-7xl mx-auto flex-grow">
-   <a aria-label="Next page" class="bg-sky-300 rounded-full w-12 h-12 flex items-center justify-center inline-block" href="grafica.html">
+   <a href="../Inicio/lectura.php" aria-label="Next page" class="bg-sky-300 rounded-full w-12 h-12 flex items-center justify-center inline-block">
     <svg class="h-6 w-6 text-black" fill="none" stroke="currentColor" stroke-width="3" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-     <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round">
-     </path>
+     <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path>
     </svg>
    </a>
   </div>
-  <script src="../funciones/src7.js"></script>
+  <script src="../funciones/src6.js"></script>
  </body>
 </html>

@@ -1,123 +1,110 @@
- // Create raindrops dynamically
-    const rainContainer = document.getElementById('rainContainer');
-    const raindropCount = 100;
-    let raindrops = [];
+// Creación dinámica de gotas de lluvia
+const rainContainer = document.getElementById('rainContainer');
+const raindropCount = 100;
+let raindrops = [];
 
-    function createRaindrop() {
-      const drop = document.createElement('div');
-      drop.classList.add('raindrop');
-      drop.style.left = Math.random() * 100 + 'vw';
-      drop.style.animationDuration = 0.5 + Math.random() * 0.7 + 's';
-      drop.style.animationDelay = Math.random() * 10 + 's';
-      drop.style.height = 10 + Math.random() * 10 + 'px';
-      drop.style.width = 1 + Math.random() * 2 + 'px';
-      rainContainer.appendChild(drop);
-      raindrops.push(drop);
-    }
+function createRaindrop() {
+    const drop = document.createElement('div');
+    drop.classList.add('raindrop');
+    drop.style.left = Math.random() * 100 + 'vw';
+    drop.style.animationDuration = 0.5 + Math.random() * 0.7 + 's';
+    drop.style.animationDelay = Math.random() * 10 + 's';
+    drop.style.height = 10 + Math.random() * 10 + 'px';
+    drop.style.width = 1 + Math.random() * 2 + 'px';
+    rainContainer.appendChild(drop);
+    raindrops.push(drop);
+}
 
-    for (let i = 0; i < raindropCount; i++) {
-      createRaindrop();
-    }
+for (let i = 0; i < raindropCount; i++) {
+    createRaindrop();
+}
 
-    // Optional: Change rain intensity or style every 10 seconds
-    setInterval(() => {
-      raindrops.forEach(drop => {
+// Ajustes dinámicos en la intensidad de la lluvia
+setInterval(() => {
+    raindrops.forEach(drop => {
         drop.style.opacity = 0.3 + Math.random() * 0.7;
         drop.style.animationDuration = 0.4 + Math.random() * 0.8 + 's';
-      });
-    }, 10000);
-
-    // Animate gota image size changing every 10 seconds
-    const gotaImagen = document.getElementById('gotaImagen');
-    let isLarge = false;
-    setInterval(() => {
-      if (isLarge) {
-        gotaImagen.style.width = '100px';
-        gotaImagen.style.height = 'auto';
-      } else {
-        gotaImagen.style.width = '100px';
-        gotaImagen.style.height = 'auto';
-      }
-      isLarge = !isLarge;
-    }, 1000);
-
-    const form = document.getElementById('multiStepForm');
-    const steps = form.querySelectorAll('.step');
-    let currentStep = 0;
-
-    const fechaInput = document.getElementById('fecha');
-    const fechaDisplay = document.getElementById('fecha-display');
-
-    fechaInput?.addEventListener('input', () => {
-      if (fechaInput.value) {
-        const date = new Date(fechaInput.value);
-        if (!isNaN(date)) {
-          const options = { year: 'numeric', month: 'long', day: 'numeric' };
-          fechaDisplay.textContent = date.toLocaleDateString('es-ES', options);
-        } else {
-          fechaDisplay.textContent = '';
-        }
-      } else {
-        fechaDisplay.textContent = '';
-      }
     });
+}, 10000);
 
-    function validateStep(stepIndex) {
-      const step = steps[stepIndex];
-      const inputs = step.querySelectorAll('input[required]');
-      let valid = true;
-      inputs.forEach(input => {
-        if (!input.value.trim()) {
-          valid = false;
-        }
-      });
-      return valid;
-    }
+// Animación del tamaño de la imagen de la gota
+const gotaImagen = document.getElementById('gotaImagen');
+let isLarge = false;
+setInterval(() => {
+    gotaImagen.style.width = isLarge ? '100px' : '120px';
+    gotaImagen.style.height = 'auto';
+    isLarge = !isLarge;
+}, 1000);
 
-    function showError(stepIndex, show) {
-      const error = document.getElementById(`error-step-${stepIndex + 1}`);
-      if (error) {
-        error.style.display = show ? 'block' : 'none';
-      }
-    }
+// Lógica del formulario con múltiples pasos
+const form = document.getElementById('multiStepForm');
+const steps = form.querySelectorAll('.step');
+let currentStep = 0;
 
-    function showStep(stepIndex) {
-      steps.forEach((step, i) => {
+function validateStep(stepIndex) {
+    const step = steps[stepIndex];
+    const inputs = step.querySelectorAll('input[required]');
+    return [...inputs].every(input => input.value.trim() !== '');
+}
+
+function showError(stepIndex, show) {
+    const error = document.getElementById(`error-step-${stepIndex + 1}`);
+    if (error) error.style.display = show ? 'block' : 'none';
+}
+
+function showStep(stepIndex) {
+    steps.forEach((step, i) => {
         step.classList.toggle('active', i === stepIndex);
         showError(i, false);
-      });
-    }
-
-    function nextStep() {
-      if (validateStep(currentStep)) {
-        currentStep++;
-        if (currentStep >= steps.length) {
-          currentStep = steps.length - 1;
-        }
-        showStep(currentStep);
-      } else {
-        showError(currentStep, true);
-      }
-    }
-
-    function prevStep() {
-      currentStep--;
-      if (currentStep < 0) currentStep = 0;
-      showStep(currentStep);
-    }
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (validateStep(currentStep)) {
-        alert('Formulario enviado correctamente!');
-        form.reset();
-        fechaDisplay.textContent = '';
-        currentStep = 0;
-        showStep(currentStep);
-      } else {
-        showError(currentStep, true);
-      }
     });
+}
 
-    // Initialize first step visible
+function nextStep() {
+    if (validateStep(currentStep)) {
+        currentStep = Math.min(currentStep + 1, steps.length - 1);
+        showStep(currentStep);
+    } else {
+        showError(currentStep, true);
+    }
+}
+
+function prevStep() {
+    currentStep = Math.max(currentStep - 1, 0);
     showStep(currentStep);
+}
+
+// Envío del formulario y redirección tras éxito
+form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Evita la recarga de la página
+    const formData = new FormData(form);
+
+    try {
+        const response = await fetch('../backend/registro.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        const data = await response.json();
+        if (data.Respuesta === 'Registro exitoso') {
+            alert('Registro exitoso');
+            window.location.href = "../inicio/sesion.php";
+        } else {
+            alert(data.Respuesta);
+        }
+    } catch (error) {
+        console.error('Error en el registro:', error);
+    }
+});
+
+// Actualización dinámica de fecha
+const fechaInput = document.getElementById('fecha');
+const fechaDisplay = document.getElementById('fecha-display');
+
+fechaInput?.addEventListener('input', () => {
+    if (fechaInput.value) {
+        const date = new Date(fechaInput.value);
+        fechaDisplay.textContent = isNaN(date) ? '' : date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
+    } else {
+        fechaDisplay.textContent = '';
+    }
+});

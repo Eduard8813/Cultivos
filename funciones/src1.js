@@ -79,6 +79,6 @@ setInterval(() => {
 
 // Redirect to next page after 10 seconds
 setTimeout(() => {
-  window.location.href = "sesion.html";
+  window.location.href = "sesion.php";
 }, 10000);
 
