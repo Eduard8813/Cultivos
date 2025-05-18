@@ -71,13 +71,9 @@
     />
     <div class="flex flex-wrap justify-between gap-y-4">
      <button
-      id="submitBtn"
-      onclick="window.location.href='general.php';"
-      disabled
-      class="bg-pink-700 cursor-not-allowed rounded-full px-8 py-3 text-lg font-semibold text-white min-w-[160px] opacity-50 transition-colors"
-      type="submit"
-     >
-      Iniciar sesión
+      id="login-btn"
+      class="btn"
+      onclick="validar()"> Iniciar sesión
      </button>
      <button
       onclick="window.location.href='password.php';"

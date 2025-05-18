@@ -1,18 +1,17 @@
-  const emailInput = document.getElementById('email');
+   const loginbtn = document.getElementById('login-btn');
+   const emailInput = document.getElementById('email');
    const passwordInput = document.getElementById('password');
-   const submitBtn = document.getElementById('submitBtn');
+
 
    function validateInputs() {
     const emailFilled = emailInput.value.trim() !== '';
     const passwordFilled = passwordInput.value.trim() !== '';
     if (emailFilled && passwordFilled) {
-     submitBtn.disabled = false;
-     submitBtn.classList.remove('cursor-not-allowed', 'opacity-50');
-     submitBtn.classList.add('hover:bg-pink-800');
+     loginbtn.classList.remove('cursor-not-allowed', 'opacity-50');
+     loginbtn.classList.add('hover:bg-pink-800');
     } else {
-     submitBtn.disabled = true;
-     submitBtn.classList.add('cursor-not-allowed', 'opacity-50');
-     submitBtn.classList.remove('hover:bg-pink-800');
+     loginbtn.classList.add('cursor-not-allowed', 'opacity-50');
+     loginbtn.classList.remove('hover:bg-pink-800');
     }
    }
 
@@ -52,3 +51,37 @@
    setInterval(() => {
     cycleAnimations();
    }, 10000);
+
+   // Función para validar campos vacíos en el formulario de inicio de sesión
+function validar() {
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+
+    if (emailInput.value.trim() === '' || passwordInput.value.trim() === '') {
+        alert('Por favor, ingresa ambos campos');
+        return false;
+    } else {
+        const formData = new FormData();
+        formData.append('email', emailInput.value);
+        formData.append('contraseña', passwordInput.value);
+        formData.append("login", true)
+
+        fetch('../backend/login.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+
+                if (data.Respuesta === 'Login successful') {
+                   alert('Usuario registrado correctamente');
+                    window.location.href ='general.php';
+                } else {
+                    alert('Usuario o contraseña incorrecta');
+                }
+            })
+            .catch(error => console.error(error));
+        return true;
+    }
+}
