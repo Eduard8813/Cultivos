@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Capturar datos enviados desde el formulario
     $correo = $_POST['correo'] ?? '';
-    $nombre = $_POST['nombre'] ?? '';
+    $nombre = $_POST['nombre'] ?? '';   
     $apellido = $_POST['apellido'] ?? '';
     $fecha_nacimiento = $_POST['fecha'] ?? '';
     $zona = $_POST['zona'] ?? '';

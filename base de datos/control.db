@@ -1,5 +1,4 @@
 CREATE DATABASE Control;
-
 USE Control;
 
 CREATE TABLE users (
@@ -7,13 +6,16 @@ CREATE TABLE users (
   email VARCHAR(100) NOT NULL UNIQUE,
   first_name VARCHAR(50) NOT NULL,
   last_name VARCHAR(50) NOT NULL,
-  fecha_de_nacimiento DATE NOT NULL,
-  password VARCHAR(255) NOT NULL,
-  phone VARCHAR(20) NOT NULL,
+  birth_date DATE NOT NULL,
+  password VARCHAR(255) NOT NULL, -- Almacenar como hash
+  phone VARCHAR(20) NOT NULL UNIQUE, -- Evita duplicados
+  cuidad VARCHAR(40) NOT NULL,
+  region  VARCHAR (45) NOT NULL,
+  area VARCHAR(40) NOT NULL,
   zona VARCHAR(100) NOT NULL, 
-  temperature FLOAT, -- Cambiado a DECIMAL para mayor precisión
-  humidity FLOAT,    -- Cambiado a DECIMAL para mayor precisión
   cultivo VARCHAR(100) NOT NULL,
+  temperature FLOAT,
+  humidity FLOAT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
