@@ -1,37 +1,47 @@
 <?php
-require_once 'database.php';
+require_once 'database.php'; // Asegúrate de que este archivo configura correctamente la conexión
 
-if (isset($_POST['login'])) {
-    $username = $_POST['correo'];
-    $password = $_POST['contrasena'];
+header('Content-Type: application/json'); // Define la respuesta como JSON
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-    // Validate input
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
+    $email = isset($_POST['email']) ? trim($_POST['email']) : null;
+    $password = isset($_POST['password']) ? trim($_POST['password']) : null;
+
+    // Validación de entrada
     if (empty($email) || empty($password)) {
-        echo json_encode(["Respuesta"=> "Please fill in all fields"]);
+        echo json_encode(["Respuesta" => "Por favor, ingresa ambos campos"]);
         exit;
     }
 
-    // Query database
-    $query = "SELECT * FROM users WHERE email = '$correo'";
-    $result = $conn->query($query);
+    // Consulta segura a la base de datos utilizando prepared statements
+    $query = $conn->prepare("SELECT id, email, password FROM users WHERE email = ?");
+    $query->bind_param("s", $email);
+    $query->execute();
+    $result = $query->get_result();
+
     if ($result->num_rows > 0) {
         $user_data = $result->fetch_assoc();
+        
+        // Verificación de contraseña
         if (password_verify($password, $user_data['password'])) {
-            // Login successful, start session
             session_start();
-            $_SESSION['email'] = $correo;
-            $_SESSION['user_id'] = $user_data['id']; // Store the user ID in the session
+            $_SESSION['email'] = $user_data['email'];
+            $_SESSION['user_id'] = $user_data['id'];
 
             echo json_encode(["Respuesta" => "Login successful"]);
-            return;
+            exit;
         } else {
-            echo json_encode(["Respuesta" => "Invalid password"]);
-            return;
+            echo json_encode(["Respuesta" => "Contraseña incorrecta"]);
+            exit;
         }
     } else {
-        echo json_encode(["Respuesta" => "Username not found"]);
-        return;
+        echo json_encode(["Respuesta" => "Email no encontrado"]);
+        exit;
     }
+} else {
+    echo json_encode(["Respuesta" => "Método no permitido"]);
+    exit;
 }
-
 ?>
