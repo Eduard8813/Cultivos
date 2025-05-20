@@ -7,8 +7,8 @@ CREATE TABLE users (
   first_name VARCHAR(50) NOT NULL,
   last_name VARCHAR(50) NOT NULL,
   birth_date DATE NOT NULL,
-  password VARCHAR(255) NOT NULL, -- Almacenar como hash
-  phone VARCHAR(20) NOT NULL UNIQUE, -- Evita duplicados
+  password VARCHAR(255) NOT NULL, 
+  phone VARCHAR(20) NOT NULL UNIQUE, 
   cuidad VARCHAR(40) NOT NULL,
   region  VARCHAR (45) NOT NULL,
   area VARCHAR(40) NOT NULL,

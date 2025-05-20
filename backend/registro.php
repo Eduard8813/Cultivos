@@ -11,13 +11,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $correo = $_POST['correo'] ?? '';
     $nombre = $_POST['nombre'] ?? '';   
     $apellido = $_POST['apellido'] ?? '';
-    $fecha_nacimiento = $_POST['fecha'] ?? '';
+    $birth_date = $_POST['fecha'] ?? '';
     $zona = $_POST['zona'] ?? '';
     $telefono = $_POST['telefono'] ?? '';
     $contrasena = $_POST['contrasena'] ?? '';
 
     // Validar que los campos no estén vacíos
-    if (empty($correo) || empty($nombre) || empty($apellido) || empty($fecha_nacimiento) || empty($zona) || empty($telefono) || empty($contrasena)) {
+    if (empty($correo) || empty($nombre) || empty($apellido) || empty($birth_date) || empty($zona) || empty($telefono) || empty($contrasena)) {
         echo json_encode(["Respuesta" => "Por favor, completa todos los campos"]);
         exit;
     }
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $hashed_password = password_hash($contrasena, PASSWORD_DEFAULT);
 
     // Insertar datos en la base de datos
-    $query = "INSERT INTO users (email, first_name, last_name, fecha_de_nacimiento, password, phone, zona) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO users (email, first_name, last_name, birth_date, password, phone, zona) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($query);
 
     if (!$stmt) {
@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Asociar los parámetros correctamente
-    $stmt->bind_param("sssssss", $correo, $nombre, $apellido, $fecha_nacimiento, $hashed_password, $telefono, $zona);
+    $stmt->bind_param("sssssss", $correo, $nombre, $apellido, $birth_date, $hashed_password, $telefono, $zona);
 
     // Ejecutar la consulta y verificar que los datos se inserten correctamente
     if ($stmt->execute()) {
