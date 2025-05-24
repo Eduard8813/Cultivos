@@ -52,7 +52,7 @@
       </div>
       <div class="input-group" style="left: 10px; right: 10px;">
        <img alt="Pink location pin icon" class="w-6 h-6" height="24" src="../Imagenes/Imagen2.png" width="24"/>
-       <input aria-label="Tamaño del área en monitoreo" class="placeholder-white" id="tamano" name="tamano" placeholder="Tamaño del área en monitoreo" required="" type="text"/>
+       <input aria-label="Tamaño del área en monitoreo" class="placeholder-white" id="tamano" name="area" placeholder="Tamaño del área en monitoreo" required="" type="text"/>
       </div>
       <button class="bg-pink-600 text-white font-semibold rounded-full px-8 py-2 block mx-auto mt-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed" disabled="" id="submitBtn" type="submit">
        Siguiente

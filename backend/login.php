@@ -1,47 +1,54 @@
 <?php
-require_once 'database.php'; // Asegúrate de que este archivo configura correctamente la conexión
+session_start(); // Iniciar sesión
+require_once 'database.php'; // Conectar a la base de datos
 
-header('Content-Type: application/json'); // Define la respuesta como JSON
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+header('Content-Type: application/json'); // Enviar respuesta JSON
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
-    $email = isset($_POST['email']) ? trim($_POST['email']) : null;
-    $password = isset($_POST['password']) ? trim($_POST['password']) : null;
+    $email = trim($_POST['email'] ?? '');
+    $password = trim($_POST['password'] ?? '');
 
-    // Validación de entrada
     if (empty($email) || empty($password)) {
         echo json_encode(["Respuesta" => "Por favor, ingresa ambos campos"]);
         exit;
     }
 
-    // Consulta segura a la base de datos utilizando prepared statements
+    if (!$conn) {
+        echo json_encode(["Respuesta" => "Error en la conexión a la base de datos"]);
+        exit;
+    }
+
     $query = $conn->prepare("SELECT id, email, password FROM users WHERE email = ?");
+    if (!$query) {
+        echo json_encode(["Respuesta" => "Error en la preparación de la consulta"]);
+        exit;
+    }
+
     $query->bind_param("s", $email);
     $query->execute();
     $result = $query->get_result();
 
     if ($result->num_rows > 0) {
         $user_data = $result->fetch_assoc();
-        
-        // Verificación de contraseña
-        if (password_verify($password, $user_data['password'])) {
-            session_start();
-            $_SESSION['email'] = $user_data['email'];
-            $_SESSION['user_id'] = $user_data['id'];
 
-            echo json_encode(["Respuesta" => "Login successful"]);
-            exit;
+        if (password_verify($password, $user_data['password'])) {
+            // Guardar ID y email del usuario en la sesión
+            $_SESSION['user_id'] = $user_data['id'];
+            $_SESSION['email'] = $user_data['email'];
+
+            echo json_encode([
+                "Respuesta" => "Login successful",
+                "redirect_url" => "general.php"
+            ]);
         } else {
             echo json_encode(["Respuesta" => "Contraseña incorrecta"]);
-            exit;
         }
     } else {
         echo json_encode(["Respuesta" => "Email no encontrado"]);
-        exit;
     }
-} else {
-    echo json_encode(["Respuesta" => "Método no permitido"]);
-    exit;
+
+    $query->close();
+    $conn->close();
 }
+
 ?>
