@@ -1,6 +1,6 @@
 <?php
-session_start(); // Iniciar sesión
 require_once 'database.php'; // Conectar a la base de datos
+session_start(); // Asegurar que la sesión inicia
 
 header('Content-Type: application/json'); // Enviar respuesta JSON
 
@@ -32,9 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
         $user_data = $result->fetch_assoc();
 
         if (password_verify($password, $user_data['password'])) {
-            // Guardar ID y email del usuario en la sesión
+            // Guardar ID del usuario en la sesión
             $_SESSION['user_id'] = $user_data['id'];
-            $_SESSION['email'] = $user_data['email'];
 
             echo json_encode([
                 "Respuesta" => "Login successful",
@@ -50,5 +49,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     $query->close();
     $conn->close();
 }
-
 ?>
+    
