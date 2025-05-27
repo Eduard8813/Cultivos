@@ -34,7 +34,7 @@
      CAMPOS
     </div>
     <div class="campos-buttons">
-     <button class="btn-pina" type="button" tabindex="0">
+    <button id="btnPina" class="btn-pina" type="button" onclick="enviarPiña()">
       <img alt="Illustration of a cute pineapple with green leaves and orange body" src="../Imagenes/piña1.png" width="64" height="64"/>
       <span>Piña</span>
      </button>
