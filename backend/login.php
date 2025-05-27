@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
 
             echo json_encode([
                 "Respuesta" => "Login successful",
-                "redirect_url" => "general.php"
+                "redirect_url" => "consulta1.php  "
             ]);
         } else {
             echo json_encode(["Respuesta" => "Contraseña incorrecta"]);

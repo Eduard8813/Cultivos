@@ -74,7 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("Servidor:", data);
 
             if (data.Respuesta === 'Login successful') {
-                window.location.href = 'general.php';
+                // Redirigir a consulta1.php en caso de éxito
+                window.location.href = '../backend/consulta1.php';
             } else {
                 alert('Email o contraseña incorrecta');
             }
