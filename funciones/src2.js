@@ -3,7 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
 
-    // Validación de entrada
+    if (!loginBtn || !emailInput || !passwordInput) {
+        console.error("Error: No se encontraron elementos en el DOM.");
+        return;
+    }
+
     function validateInputs() {
         const emailFilled = emailInput.value.trim() !== '';
         const passwordFilled = passwordInput.value.trim() !== '';
@@ -20,35 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     emailInput.addEventListener('input', validateInputs);
     passwordInput.addEventListener('input', validateInputs);
 
-    // Animación de gotas
-    const dropsContainer = document.getElementById('drops-container');
-    const animations = ['drop-fall-1', 'drop-fall-2', 'drop-fall-3'];
-    let currentAnimationIndex = 0;
-
-    function generateDrops() {
-        for (let i = 1; i <= 20; i++) {
-            const drop = document.createElement('div');
-            drop.className = 'drop';
-            drop.style.left = `${Math.random() * 100}%`;
-            drop.style.animationDuration = `${1 + Math.random()}s`;
-            dropsContainer.appendChild(drop);
-        }
-    }
-
-    function cycleAnimations() {
-        const drops = document.querySelectorAll('#drops-container .drop');
-        drops.forEach(drop => {
-            drop.style.animationName = animations[currentAnimationIndex];
-            drop.style.animationPlayState = 'running';
-        });
-        currentAnimationIndex = (currentAnimationIndex + 1) % animations.length;
-    }
-
-    generateDrops();
-    cycleAnimations();
-    setInterval(cycleAnimations, 10000);
-
-    // Función para validar el formulario y hacer la petición al backend
     function validar() {
         if (emailInput.value.trim() === '' || passwordInput.value.trim() === '') {
             alert('Por favor, ingresa ambos campos');
@@ -65,24 +40,28 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('password', passwordInput.value);
         formData.append("login", true);
 
-        fetch('../backend/login.php', {
+       fetch('../backend/login.php', {
             method: 'POST',
             body: formData
         })
-        .then(response => response.json())
+        .then(response => response.text())  // Usa .text() en lugar de .json() para ver el contenido real
         .then(data => {
-            console.log("Servidor:", data);
-
-            if (data.Respuesta === 'Login successful') {
-                // Redirigir a consulta1.php en caso de éxito
-                window.location.href = '../backend/consulta1.php';
-            } else {
-                alert('Email o contraseña incorrecta');
+            console.log("Respuesta del servidor:", data); // Ver qué realmente devuelve el servidor
+            try {
+                const jsonData = JSON.parse(data); // Convertir manualmente a JSON
+                if (jsonData.redirect) {
+                    window.location.href = jsonData.redirect;
+                } else {
+                    alert("Error: " + jsonData.error);
+                }
+            } catch (error) {
+                console.error("Error al analizar JSON:", error);
+                alert("Respuesta del servidor no válida.");
             }
         })
         .catch(error => {
-            console.error('Error:', error);
-            alert('Hubo un error con el servidor. Inténtalo de nuevo más tarde.');
+            console.error("Error en la petición:", error);
+            alert("Hubo un error con el servidor.");
         });
 
         return true;

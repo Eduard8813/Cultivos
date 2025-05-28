@@ -38,7 +38,7 @@
             <input id="password" class="w-full rounded-md py-2 px-4 mb-6 text-black text-lg" type="password" placeholder="Tu contraseña" required>
 
             <div class="flex justify-between items-center">
-                <button id="login-btn" class="btn bg-pink-600 text-white py-2 px-4 rounded hover:bg-pink-800 transition" onclick="validar()">Iniciar sesión</button>
+                <button id="login-btn" class="btn bg-pink-600 text-white py-2 px-4 rounded hover:bg-pink-800 transition">Iniciar sesión</button>
                 <a href="password.php" class="text-lg font-semibold hover:underline">Olvidaste tu contraseña</a>
             </div>
 
