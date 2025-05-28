@@ -63,8 +63,8 @@ if (!$data_result || $data_result->num_rows === 0) {
 }
 
 // ✅ 6. Eliminar sesión después de la validación
-session_unset();
-session_destroy();
+//session_unset();
+//session_destroy();
 
 // Cerrar consultas y conexión
 $user_query->close();

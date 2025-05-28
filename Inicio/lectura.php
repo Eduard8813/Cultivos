@@ -52,15 +52,6 @@
         </div>
     </div>
 
-    <!-- Botón de navegación -->
-    <div class="flex justify-end px-10 mt-10 max-w-7xl mx-auto flex-grow">
-        <a class="bg-sky-300 rounded-full w-12 h-12 flex items-center justify-center" href="grafica.php">
-            <svg class="h-6 w-6 text-black" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-        </a>
-    </div>
-
     <!-- Importación del script JavaScript -->
     <script src="../funciones/src7.js"></script>
 </body>
