@@ -1,0 +1,4 @@
+smtp_port=587
+SMTP=smtp.gmail.com
+sendmail_from = eduardmora88@gmail.com
+sendmail_path ="\"C:\xampp\sendmail\sendmail.exe\" -t"
