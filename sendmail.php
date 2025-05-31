@@ -18,11 +18,13 @@ try {
     $mail->Port = 587;
 
     $mail->setFrom('eduardmora88@gmail.com', 'Eduard');
-    $mail->addAddress('faruich.hanon22049082@estu.unan.edu.ni'); // Destinatario
+    $mail->addAddress('eduardmora888@gmail.com'); // Destinatario
 
-    $mail->Subject = "Prueba de correo con PHPMailer";
+    $mail->Subject = "Notificación importante";
     $mail->isHTML(true);
-    $mail->Body = "<h3>El que lo lea es puto.</h3>";
+    $mail->Body = "<h3>Estimado(a),</h3>
+                   <p>Espero que este mensaje le encuentre bien. Le escribo para informarle sobre un asunto importante. Si requiere más detalles, no dude en responder a este correo.</p>
+                   <p>Atentamente,<br>Eduard</p>";
 
     if ($mail->send()) {
         echo "✅ Correo enviado correctamente!";

@@ -42,20 +42,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'eduardmora88@gmail.com';
-                $mail->Password = 'lahj sbnv ifzd bzsa';
+                $mail->Username = 'eduardmora88@gmail.com'; // Cambiar a correo corporativo
+                $mail->Password = 'lahj sbnv ifzd bzsa'; // Usa una contraseña segura o credenciales de aplicación
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
 
-                $mail->setFrom('eduardmora88@gmail.com', 'Rieguito');
+                $mail->setFrom('eduardmora88@gmail.com', 'Soporte - Rieguito');
                 $mail->addAddress($email);
-                $mail->Subject = "Recuperacion de contrasena";
+                $mail->Subject = "Solicitud de Restablecimiento de Contraseña";
                 $mail->isHTML(true);
-                $mail->Body = "<p>Hola,<br><br>Haz clic en el enlace para restablecer tu contraseña:<br><br><a href='https://tu_sitio.com/restablecer'>Restablecer contraseña</a></p>";
+                $mail->Body = "<div style='position: relative; padding: 20px;'>
+                                   <img src='https://bing.com/th/id/BCO.fd6dda68-9326-4821-bb61-8e8dd3d5892f.png' style='position: absolute; top: 10px; right: 10px; width: 100px;' alt='Logo'>
+                                   <p>Estimado usuario,<br><br>
+                                   Hemos recibido una solicitud para restablecer su contraseña. Si no ha realizado esta solicitud, ignore este mensaje.<br><br>
+                                   Para continuar con el restablecimiento, haga clic en el siguiente enlace:<br><br>
+                                   <a href='https://tuempresa.com/restablecer'>Restablecer contraseña</a><br><br>
+                                   Atentamente,<br>
+                                   <strong>Equipo de Soporte - Rieguito</strong></p>
+                               </div>";
 
                 if ($mail->send()) {
                     $response["success"] = true;
-                    $response["message"] = "✅ Correo enviado.";
+                    $response["message"] = "✅ Correo enviado exitosamente.";
                 } else {
                     throw new Exception("❌ Error al enviar el correo: " . $mail->ErrorInfo);
                 }
